@@ -1,4 +1,4 @@
-import Tasks from "./components/Task";
+import Tasks from './components/Task';
 
 function App() {
   return <Tasks />;

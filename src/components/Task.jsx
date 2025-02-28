@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import Header from "./Header";
+import { useEffect, useRef, useState } from 'react';
+import Header from './Header';
 
 function Tasks() {
   const didMount = useRef(false);
-  const [inputValue, setInputValue] = useState("");
-  const [messages, setMessages] = useState(["Hello", "World"]);
+  const [inputValue, setInputValue] = useState('');
+  const [messages, setMessages] = useState(['Hello', 'World']);
   function handleButtonClick() {
     setMessages([...messages, inputValue]);
   }
@@ -12,13 +12,13 @@ function Tasks() {
   // componentDidUpdate
   useEffect(() => {
     if (didMount.current) {
-      console.log("Updating");
+      console.log('Updating');
     }
   });
 
   // componentDidMount
   useEffect(() => {
-    console.log("Mounting");
+    console.log('Mounting');
     didMount.current = true;
   }, []);
   return (
@@ -43,7 +43,7 @@ function Tasks() {
       <div>
         <ul>
           {messages.map((message) => (
-            <li>{message}</li>
+            <li key={message}>{message}</li>
           ))}
         </ul>
       </div>
