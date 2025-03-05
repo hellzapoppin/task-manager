@@ -62,6 +62,7 @@ const Tasks = () => {
     setTasks(newTasks);
     toast.success('Tarefa deletada com sucesso!');
   };
+
   return (
     <div className="w-full space-y-6 px-8 py-16">
       <div className="flex w-full items-center justify-between">
@@ -80,7 +81,10 @@ const Tasks = () => {
             Adicionar tarefa
             <AddIcon />
           </Button>
-          <AddTaskDialog isOpen={AddTaskDialogisOpen} />
+          <AddTaskDialog
+            isOpen={AddTaskDialogisOpen}
+            handleClose={() => setAddTaskDialogisOpen(false)}
+          />
         </div>
       </div>
 
