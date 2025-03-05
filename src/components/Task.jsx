@@ -1,55 +1,30 @@
-import { useEffect, useRef, useState } from 'react';
-import Header from './Header';
-import './../index.css';
+import Button from './Button';
+import AddIcon from '../assets/icons/add.svg?react';
+import TrashIcon from '../assets/icons/trash.svg?react';
 
-function Tasks() {
-  const didMount = useRef(false);
-  const [inputValue, setInputValue] = useState('');
-  const [messages, setMessages] = useState(['Hello', 'World']);
-  function handleButtonClick() {
-    setMessages([...messages, inputValue]);
-  }
-
-  // componentDidUpdate
-  useEffect(() => {
-    if (didMount.current) {
-      console.log('Updating');
-    }
-  });
-
-  // componentDidMount
-  useEffect(() => {
-    console.log('Mounting');
-    didMount.current = true;
-  }, []);
+const Tasks = () => {
   return (
-    <div>
-      {messages.length <= 2 && (
-        <Header>
-          <h1>Add a Task</h1>
-        </Header>
-      )}
-
-      <input
-        className="input"
-        type="text"
-        placeholder="Create your task..."
-        value={inputValue}
-        onChange={(event) => setInputValue(event.target.value)}
-      ></input>
-      <button onClick={handleButtonClick}>Add task</button>
-      <Header>
-        <h2>Tasks</h2>
-      </Header>
-      <div>
-        <ul>
-          {messages.map((message) => (
-            <li key={message}>{message}</li>
-          ))}
-        </ul>
+    <div className="w-full px-8 py-16">
+      <div className="flex w-full items-center justify-between">
+        <div>
+          <span className="text-xs font-semibold text-[#00ADB5]">
+            Minhas Tarefas
+          </span>
+          <h2 className="text-xl font-semibold">Minhas Tarefas</h2>
+        </div>
+        <div className="flex items-center gap-3">
+          <Button variant="ghost">
+            Limpar tarefa
+            <TrashIcon />
+          </Button>
+          <Button>
+            Adicionar tarefa
+            <AddIcon />
+          </Button>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default Tasks;

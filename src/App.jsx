@@ -4,8 +4,9 @@ import './index.css';
 
 function App() {
   return (
-    <div>
+    <div className="flex gap-9">
       <Sidebar />
+      <Tasks />
     </div>
   );
 }
