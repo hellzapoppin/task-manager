@@ -9,12 +9,14 @@ import {
   TrashIcon,
 } from '../assets/icons';
 import TASKS from '../contatants/tasks';
+import AddTaskDialog from './AddTaskDialog';
 import Button from './Button';
 import TaskItem from './TaskItem';
 import TaskSeparator from './TasksSeparator';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState(TASKS);
+  const [AddTaskDialogisOpen, setAddTaskDialogisOpen] = useState(false);
 
   const morningTasks = tasks.filter((task) => task.time === 'morning');
   const afternoonTasks = tasks.filter((task) => task.time === 'afternoon');
@@ -74,10 +76,11 @@ const Tasks = () => {
             Limpar tarefa
             <TrashIcon />
           </Button>
-          <Button>
+          <Button onClick={() => setAddTaskDialogisOpen(true)}>
             Adicionar tarefa
             <AddIcon />
           </Button>
+          <AddTaskDialog isOpen={AddTaskDialogisOpen} />
         </div>
       </div>
 
