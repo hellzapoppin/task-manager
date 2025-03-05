@@ -1,7 +1,9 @@
+import './index.css';
+
 import { Toaster } from 'sonner';
+
 import Sidebar from './components/Sidebar';
 import Tasks from './components/Task';
-import './index.css';
 
 function App() {
   return (
