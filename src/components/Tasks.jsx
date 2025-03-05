@@ -8,7 +8,7 @@ import {
   SunIcon,
   TrashIcon,
 } from '../assets/icons';
-import TASKS from '../contatants/tasks';
+import TASKS from '../constants/tasks';
 import AddTaskDialog from './AddTaskDialog';
 import Button from './Button';
 import TaskItem from './TaskItem';
@@ -63,6 +63,11 @@ const Tasks = () => {
     toast.success('Tarefa deletada com sucesso!');
   };
 
+  const handleAddTaskSubmit = (task) => {
+    setTasks([...tasks, task]);
+    toast.success('Tarefa adicionada com sucesso!');
+  };
+
   return (
     <div className="w-full space-y-6 px-8 py-16">
       <div className="flex w-full items-center justify-between">
@@ -84,6 +89,7 @@ const Tasks = () => {
           <AddTaskDialog
             isOpen={AddTaskDialogisOpen}
             handleClose={() => setAddTaskDialogisOpen(false)}
+            handleSubmit={handleAddTaskSubmit}
           />
         </div>
       </div>
