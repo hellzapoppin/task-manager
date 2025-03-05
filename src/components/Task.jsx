@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Header from './Header';
+import './../index.css';
 
 function Tasks() {
   const didMount = useRef(false);
