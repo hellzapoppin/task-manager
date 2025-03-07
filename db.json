@@ -48,13 +48,6 @@
       "time": "morning",
       "description": "Teste",
       "status": "not_started"
-    },
-    {
-      "id": "c085976e-6f28-47a6-85ba-100361fb5e9e",
-      "title": "Teste 2",
-      "time": "morning",
-      "description": "Teste 2",
-      "status": "not_started"
     }
   ]
 }
