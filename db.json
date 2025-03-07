@@ -27,27 +27,6 @@
       "description": "Comprar os ingredientes para o jantar",
       "time": "afternoon",
       "status": "in_progress"
-    },
-    {
-      "id": "5",
-      "title": "Descansar",
-      "description": "Assistir filme com a família",
-      "time": "evening",
-      "status": "not_started"
-    },
-    {
-      "id": "6",
-      "title": "Meditar",
-      "description": "Meditar por 10 minutos",
-      "time": "evening",
-      "status": "not_started"
-    },
-    {
-      "id": "32b5fb8a-87b5-4e38-ad74-d88e168516f4",
-      "title": "Teste",
-      "time": "morning",
-      "description": "Teste",
-      "status": "not_started"
     }
   ]
 }
