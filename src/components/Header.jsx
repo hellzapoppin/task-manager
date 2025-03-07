@@ -1,15 +1,10 @@
-import './../index.css';
-
-import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 function Header(props) {
-  // componentDidUnmount
-  useEffect(() => {
-    return () => {
-      console.log('Unmounting');
-    };
-  }, []);
   return <header className="header">{props.children}</header>;
 }
 
+Header.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 export default Header;
