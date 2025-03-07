@@ -16,6 +16,7 @@
     "react-dom": "^19.0.0",
     "react-transition-group": "^4.4.5",
     "sonner": "^2.0.1",
+    "tailwind-variants": "^0.2.1",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
