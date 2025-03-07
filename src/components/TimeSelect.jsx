@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import InputErrorMessage from './InputErrorMessage';
 import InputLabel from './InputLabel';
 
@@ -21,6 +23,11 @@ const TimeSelect = (props) => {
       )}
     </div>
   );
+};
+
+TimeSelect.propTypes = {
+  errorMessage: PropTypes.string,
+  ref: PropTypes.any,
 };
 
 export default TimeSelect;
