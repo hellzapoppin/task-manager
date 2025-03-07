@@ -19,6 +19,7 @@ const Tasks = () => {
   const [AddTaskDialogisOpen, setAddTaskDialogisOpen] = useState(false);
 
   useEffect(() => {
+    // recuperando dados da API
     const fetchTasks = async () => {
       const response = await fetch('http://localhost:3000/tasks', {
         method: 'GET',
@@ -75,7 +76,17 @@ const Tasks = () => {
     toast.success('Tarefa deletada com sucesso!');
   };
 
-  const handleAddTaskSubmit = (task) => {
+  const handleAddTaskSubmit = async (task) => {
+    // Adicionar tarefa ao banco
+    const response = await fetch('http://localhost:3000/tasks', {
+      method: 'POST',
+      body: JSON.stringify(task),
+    });
+    if (!response.ok) {
+      return toast.error(
+        'Erro ao adicionar tarefa. Por favor, tente novamente!'
+      );
+    }
     setTasks([...tasks, task]);
     toast.success('Tarefa adicionada com sucesso!');
   };
