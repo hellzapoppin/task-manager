@@ -27,6 +27,27 @@
       "description": "Comprar os ingredientes para o jantar",
       "time": "afternoon",
       "status": "in_progress"
+    },
+    {
+      "id": "0d552d45-6575-4ed6-96ed-7866ec5ca8b1",
+      "title": "Meditar",
+      "time": "evening",
+      "description": "Meditar para não pirar",
+      "status": "not_started"
+    },
+    {
+      "id": "1179",
+      "title": "Assistir série",
+      "time": "evening",
+      "description": "Assistir Dark na Netflix",
+      "status": "not_started"
+    },
+    {
+      "id": "609e",
+      "title": "Pratica Yoga",
+      "time": "morning",
+      "description": "Yoga na varanda",
+      "status": "not_started"
     }
   ]
 }

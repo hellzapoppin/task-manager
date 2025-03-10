@@ -76,19 +76,13 @@ const Tasks = () => {
     toast.success('Tarefa deletada com sucesso!');
   };
 
-  const handleAddTaskSubmit = async (task) => {
-    // Adicionar tarefa ao banco
-    const response = await fetch('http://localhost:3000/tasks', {
-      method: 'POST',
-      body: JSON.stringify(task),
-    });
-    if (!response.ok) {
-      return toast.error(
-        'Erro ao adicionar tarefa. Por favor, tente novamente!'
-      );
-    }
+  const onTaskSubmit = (task) => {
     setTasks([...tasks, task]);
     toast.success('Tarefa adicionada com sucesso!');
+  };
+
+  const onTaskSubmitError = () => {
+    toast.error('Erro ao adicionar tarefa. Por favor, tente novamente!');
   };
 
   return (
@@ -112,14 +106,16 @@ const Tasks = () => {
           <AddTaskDialog
             isOpen={AddTaskDialogisOpen}
             handleClose={() => setAddTaskDialogisOpen(false)}
-            handleSubmit={handleAddTaskSubmit}
+            onSubmitSuccess={onTaskSubmit}
           />
         </div>
       </div>
 
       <div className="rounded-lg bg-white p-6">
         <div className="space-y-3">
-          <TaskSeparator title="Manhã" icon={<SunIcon />} />
+          {morningTasks.length > 0 && (
+            <TaskSeparator title="Manhã" icon={<SunIcon />} />
+          )}
           {morningTasks.map((task) => (
             <TaskItem
               key={task.id}
@@ -130,18 +126,23 @@ const Tasks = () => {
           ))}
         </div>
         <div className="my-6 space-y-3">
-          <TaskSeparator title="Tarde" icon={<CloudSunIcon />} />
+          {afternoonTasks.length > 0 && (
+            <TaskSeparator title="Tarde" icon={<CloudSunIcon />} />
+          )}
           {afternoonTasks.map((task) => (
             <TaskItem
               key={task.id}
               task={task}
               handleCheckboxClick={handleTaskCheckboxClick}
               onDeleteSuccess={onDeleteTaskSuccess}
+              onSubmitError={onTaskSubmitError}
             />
           ))}
         </div>
         <div className="space-y-3">
-          <TaskSeparator title="Noite" icon={<MoonIcon />} />
+          {eveningTasks.length > 0 && (
+            <TaskSeparator title="Noite" icon={<MoonIcon />} />
+          )}
           {eveningTasks.map((task) => (
             <TaskItem
               key={task.id}
