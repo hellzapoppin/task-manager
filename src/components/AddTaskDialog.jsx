@@ -23,7 +23,7 @@ const AddTaskDialog = ({
   const descriptionRef = useRef();
 
   const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState();
 
   const handleSaveClick = async () => {
     setIsLoading(true);
@@ -112,14 +112,20 @@ const AddTaskDialog = ({
                   label="Titulo"
                   placeholder="Insira o título da tarefa"
                   errorMessage={titleError?.message}
+                  disabled={isLoading}
                 />
-                <TimeSelect ref={timeRef} errorMessage={timeError?.message} />
+                <TimeSelect
+                  ref={timeRef}
+                  errorMessage={timeError?.message}
+                  disabled={isLoading}
+                />
                 <Input
                   id="description"
                   ref={descriptionRef}
                   label="Descrição"
                   placeholder="Descreva a tarefa"
                   errorMessage={descriptionError?.message}
+                  disabled={isLoading}
                 />
                 <div className="flex gap-3">
                   <Button
