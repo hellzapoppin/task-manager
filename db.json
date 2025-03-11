@@ -2,10 +2,10 @@
   "tasks": [
     {
       "id": "1",
-      "title": "Estudar React",
+      "title": "Estudar React Native",
       "description": "Estudar React para melhorar minhas habilidades",
       "time": "morning",
-      "status": "done"
+      "status": ""
     },
     {
       "id": "2",
