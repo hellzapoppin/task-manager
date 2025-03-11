@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 
 import { CheckIcon, DetailsIcon, LoaderIcon, TrashIcon } from '../assets/icons';
@@ -7,6 +8,7 @@ import Button from './Button';
 
 const TaskItem = ({ task, handleCheckboxClick, onDeleteSuccess }) => {
   const [deleteIsLoading, setDeleteIsLoading] = useState(false);
+
   const handleDeleteClick = async () => {
     setDeleteIsLoading(true);
     const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
@@ -48,7 +50,7 @@ const TaskItem = ({ task, handleCheckboxClick, onDeleteSuccess }) => {
           />
           {task.status === 'done' && <CheckIcon />}
           {task.status === 'in_progress' && (
-            <LoaderIcon className="animate-spin text-brand-process" />
+            <LoaderIcon className="animate-spin text-brand-white" />
           )}
         </label>
         <span>{task.title}</span>
@@ -65,9 +67,13 @@ const TaskItem = ({ task, handleCheckboxClick, onDeleteSuccess }) => {
             <TrashIcon className="text-brand-text-gray" />
           )}
         </Button>
-        <a href="#" className="transition hover:opacity-75">
+        <Link
+          to={`/task/${task.id}`}
+          color="ghost"
+          className="transition hover:opacity-75"
+        >
           <DetailsIcon />
-        </a>
+        </Link>
       </div>
     </div>
   );
