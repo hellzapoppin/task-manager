@@ -2,10 +2,10 @@
   "tasks": [
     {
       "id": "1",
-      "title": "Estudar React Native",
+      "title": "Estudar React",
       "description": "Estudar React para melhorar minhas habilidades",
       "time": "morning",
-      "status": ""
+      "status": "done"
     },
     {
       "id": "2",
@@ -23,7 +23,7 @@
     },
     {
       "id": "4",
-      "title": "Fazer compras",
+      "title": "Fazer compras no Guanabara",
       "description": "Comprar os ingredientes para o jantar",
       "time": "afternoon",
       "status": "in_progress"
