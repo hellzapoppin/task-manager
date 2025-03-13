@@ -10,7 +10,7 @@ import {
   TrashIcon,
 } from '../assets/icons';
 import Button from '../components/Button';
-import Input from '../components/input';
+import Input from '../components/Input';
 import Sidebar from '../components/Sidebar';
 import TimeSelect from '../components/TimeSelect';
 
