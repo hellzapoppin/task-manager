@@ -4,12 +4,12 @@
       "id": "1",
       "title": "Estudar React",
       "description": "Estudar React para melhorar minhas habilidades",
-      "time": "morning",
+      "time": "evening",
       "status": "done"
     },
     {
       "id": "2",
-      "title": "Ler livro",
+      "title": "Ler livro Entorpecidos",
       "description": "Ler livro de desenvolvimento pessoal",
       "time": "morning",
       "status": "done"

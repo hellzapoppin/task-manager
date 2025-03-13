@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -17,14 +17,76 @@ import TimeSelect from '../components/TimeSelect';
 const TaskDetailsPage = () => {
   const { taskId } = useParams();
 
-  const [task, setTask] = useState([]);
-
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     handleSubmit,
     reset,
   } = useForm();
+
+  const queryClient = useQueryClient();
+
+  const { data: task } = useQuery({
+    queryKey: ['task', taskId],
+    queryFn: async () => {
+      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+        method: 'GET',
+      });
+      const task = await response.json();
+      reset(task);
+      return task;
+    },
+  });
+
+  const { mutate: deleteTask, isPending: deleteTaskIsLoading } = useMutation({
+    mutationKey: ['deleteTask', taskId],
+    mutationFn: async () => {
+      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error();
+      }
+
+      const deletedTask = await response.json();
+      queryClient.setQueryData('tasks', (oldTasks) => {
+        console.log(oldTasks);
+        const test = oldTasks.filter(
+          (oldTask) => oldTask.id !== deletedTask.id
+        );
+        console.log(test);
+        return test;
+      });
+    },
+  });
+
+  const { mutate: updateTask, isPending: updateTaskIsLoading } = useMutation({
+    mutationKey: ['updateTask', taskId],
+    mutationFn: async (task) => {
+      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          title: task.title.trim(),
+          time: task.time,
+          description: task.description.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error();
+      }
+      const updatedTask = await response.json();
+      queryClient.setQueryData('tasks', (oldTasks) => {
+        return oldTasks.map((oldTask) => {
+          if (oldTask.id === taskId) {
+            return updatedTask;
+          }
+          return oldTask;
+        });
+      });
+    },
+  });
 
   const navigate = useNavigate();
 
@@ -32,48 +94,27 @@ const TaskDetailsPage = () => {
     navigate(-1);
   };
 
-  useEffect(() => {
-    const fetchTask = async () => {
-      const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
-        method: 'GET',
-      });
-
-      const data = await response.json();
-      setTask(data);
-      reset(data);
-    };
-
-    fetchTask();
-  }, [taskId, reset]);
-
-  const handleSaveClick = async (data) => {
-    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
-      method: 'PATCH',
-      body: JSON.stringify({
-        title: data.title.trim(),
-        time: data.time,
-        description: data.description.trim(),
-      }),
+  const handleSaveClick = async (task) => {
+    updateTask(task, {
+      onSuccess: () => {
+        toast.success('Tarefa salva com sucesso!');
+      },
+      onError: () => {
+        toast.error('Ocorreu um erro ao salva a tarefa');
+      },
     });
-    if (!response.ok) {
-      return toast.error('Ocorreu um erro ao salva a tarefa');
-    }
-    const newTask = await response.json();
-    setTask(newTask);
-    toast.success('Tarefa salva com sucesso!');
   };
 
   const handleDeleteClick = async () => {
-    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
-      method: 'DELETE',
+    deleteTask(undefined, {
+      onSuccess: () => {
+        toast.success('Tarefa deletada com sucesso');
+        navigate(-1);
+      },
+      onError: () => {
+        toast.error('Erro ao deletar tarefa');
+      },
     });
-
-    if (!response.ok) {
-      return toast.error('Erro ao deletar tarefa');
-    }
-
-    toast.success('Tarefa deletada com sucesso');
-    navigate(-1);
   };
 
   return (
@@ -103,7 +144,7 @@ const TaskDetailsPage = () => {
           <Button
             className="h-fit self-end"
             color="danger"
-            disabled={isSubmitting}
+            disabled={updateTaskIsLoading || deleteTaskIsLoading}
             onClick={handleDeleteClick}
           >
             <TrashIcon />
@@ -154,7 +195,9 @@ const TaskDetailsPage = () => {
           </div>
           <div className="flex w-full justify-end gap-3">
             <Button size="large" type="submit">
-              {isSubmitting && <LoaderIcon className="animate-spin" />}
+              {(updateTaskIsLoading || deleteTaskIsLoading) && (
+                <LoaderIcon className="animate-spin" />
+              )}
               Salvar
             </Button>
           </div>
