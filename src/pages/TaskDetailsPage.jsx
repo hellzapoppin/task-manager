@@ -55,7 +55,7 @@ const TaskDetailsPage = () => {
   };
 
   const handleDeleteClick = async () => {
-    deleteTask(undefined, {
+    deleteTask(taskId, {
       onSuccess: () => {
         toast.success('Tarefa deletada com sucesso');
         navigate(-1);
