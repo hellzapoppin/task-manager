@@ -106,7 +106,6 @@ const TaskDetailsPage = () => {
             <div>
               <Input
                 id="title"
-                label="Título"
                 {...register('title', {
                   required: 'O título é obrigatório',
                   validate: (value) => {
@@ -116,8 +115,9 @@ const TaskDetailsPage = () => {
                     return true;
                   },
                 })}
+                label="Título"
                 errorMessage={errors?.title?.message}
-              ></Input>
+              />
             </div>
             <div>
               <TimeSelect
@@ -128,7 +128,6 @@ const TaskDetailsPage = () => {
             <div>
               <Input
                 id="description"
-                label="Descrição"
                 {...register('description', {
                   required: 'A descrição é obrigatório',
                   validate: (value) => {
@@ -138,8 +137,9 @@ const TaskDetailsPage = () => {
                     return true;
                   },
                 })}
+                label="Descrição"
                 errorMessage={errors?.description?.message}
-              ></Input>
+              />
             </div>
           </div>
           <div className="flex w-full justify-end gap-3">
