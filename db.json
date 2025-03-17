@@ -45,9 +45,9 @@
     {
       "id": "609e",
       "title": "Pratica Yoga",
-      "time": "morning",
+      "time": "evening",
       "description": "Yoga na varanda",
-      "status": "not_started"
+      "status": "done"
     }
   ]
 }

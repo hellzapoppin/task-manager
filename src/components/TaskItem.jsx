@@ -4,10 +4,13 @@ import { toast } from 'sonner';
 
 import { CheckIcon, DetailsIcon, LoaderIcon, TrashIcon } from '../assets/icons';
 import { useDeteleTask } from '../hooks/data/use-delete-task';
+import { useUpdateTask } from '../hooks/data/use-update-task';
 import Button from './Button';
 
-const TaskItem = ({ task, handleCheckboxClick }) => {
+const TaskItem = ({ task }) => {
   const { mutate: deleteTask, isPending } = useDeteleTask(task.id);
+
+  const { mutate: updateTask } = useUpdateTask(task.id);
 
   const handleDeleteClick = async () => {
     deleteTask(undefined, {
@@ -19,6 +22,33 @@ const TaskItem = ({ task, handleCheckboxClick }) => {
       },
     });
   };
+
+  const getNewStatus = () => {
+    if (task.status === 'not_started') {
+      return 'in_progress';
+    }
+    if (task.status === 'in_progress') {
+      return 'done';
+    }
+    return 'not_started';
+  };
+
+  const handleCheckboxClick = () => {
+    updateTask(
+      {
+        status: getNewStatus(),
+      },
+      {
+        onSuccess: () =>
+          toast.success('Status da tarefa atualizado com sucesso'),
+        onError: () =>
+          toast.error(
+            'Erro ao atualizar status da tarefa. Por favor, tente novamente.'
+          ),
+      }
+    );
+  };
+
   const getStatusClasses = () => {
     if (task.status === 'done') {
       return 'bg-brand-primary text-brand-primary';
@@ -42,7 +72,7 @@ const TaskItem = ({ task, handleCheckboxClick }) => {
             type="checkbox"
             checked={task.status === 'done'}
             className="cursos-pointer absolute h-full w-full opacity-0"
-            onChange={() => handleCheckboxClick(task.id)}
+            onChange={handleCheckboxClick}
           />
           {task.status === 'done' && <CheckIcon />}
           {task.status === 'in_progress' && (
@@ -79,7 +109,6 @@ TaskItem.propTypes = {
     time: PropTypes.oneOf(['morning', 'afternoon', 'evening']).isRequired,
     status: PropTypes.oneOf(['not_started', 'in_progress', 'done']).isRequired,
   }).isRequired,
-  handleCheckboxClick: PropTypes.func.isRequired,
   handleDeleteClick: PropTypes.func.isRequired,
 };
 
