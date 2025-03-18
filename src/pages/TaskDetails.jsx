@@ -12,7 +12,7 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import Sidebar from '../components/Sidebar';
 import TimeSelect from '../components/TimeSelect';
-import { useDeteleTask } from '../hooks/data/use-delete-task';
+import { useDeleteTask } from '../hooks/data/use-delete-task';
 import { useGetTask } from '../hooks/data/use-get-task';
 import { useUpdateTask } from '../hooks/data/use-update-task';
 
@@ -32,7 +32,7 @@ const TaskDetailsPage = () => {
   });
 
   const { mutate: deleteTask, isPending: deleteTaskIsLoading } =
-    useDeteleTask(taskId);
+    useDeleteTask(taskId);
 
   const { mutate: updateTask, isPending: updateTaskIsLoading } =
     useUpdateTask(taskId);

@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 
 import { CheckIcon, DetailsIcon, LoaderIcon, TrashIcon } from '../assets/icons';
-import { useDeteleTask } from '../hooks/data/use-delete-task';
+import { useDeleteTask } from '../hooks/data/use-delete-task';
 import { useUpdateTask } from '../hooks/data/use-update-task';
 import Button from './Button';
 
 const TaskItem = ({ task }) => {
-  const { mutate: deleteTask, isPending } = useDeteleTask(task.id);
+  const { mutate: deleteTask, isPending } = useDeleteTask(task.id);
 
   const { mutate: updateTask } = useUpdateTask(task.id);
 

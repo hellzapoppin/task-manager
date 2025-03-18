@@ -4,7 +4,7 @@ import { taskMutationKeys } from '../../keys/mutations';
 import { taskQueryKeys } from '../../keys/queries';
 import { api } from '../../lib/axios';
 
-export const useDeteleTask = (taskId) => {
+export const useDeleteTask = (taskId) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: taskMutationKeys.delete(taskId),
